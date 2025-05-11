@@ -1,4 +1,5 @@
 import { supabase } from '../supabaseClient'
+import DashboardInsights from '../components/DashboardInsights'
 
 export default function Dashboard() {
   const logout = async () => {
@@ -7,8 +8,9 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-green-100 text-gray-800">
-      <h1 className="text-3xl font-bold mb-4">Bem-vindo ao Financeiro App</h1>
-    </div>
+    <div className="p-4">
+    <DashboardInsights />
+    
+  </div>
   )
 }
