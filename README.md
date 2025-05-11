@@ -52,20 +52,11 @@ npm run build
 - [x] Monthly report by status and type
 - [x] Cash flow chart and projected vs. realized balance
 
-## 🗃️ Supabase Tables
+## Supabase Tables
 
 - `bills`: unpaid or scheduled bills
 - `transactions`: confirmed payments (after marking as paid)
 
-## 📸 Screenshots
-
-You can add screenshots to `docs/` and reference them here, like:
-
-```md
-![Bills screen](./docs/bills.png)
-![Flow chart](./docs/flow.png)
-```
-
-## 📄 License
+## License
 
 MIT
