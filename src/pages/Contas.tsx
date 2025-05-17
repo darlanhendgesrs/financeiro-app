@@ -161,7 +161,8 @@ export default function Contas() {
       {/* Formulário */}
       <form onSubmit={handleSubmit} className="space-y-2 mb-6">
         <input type="text" placeholder="Descrição" value={description} onChange={(e) => setDescription(e.target.value)} className="w-full border p-2 rounded" required />
-        <input type="number" placeholder="Valor total" value={amount} onChange={(e) => setAmount(Number(e.target.value))} className="w-full border p-2 rounded" required />
+        <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value))} className="w-full border p-2 rounded" required />
+
         {amount > 0 && !noVat && (
           <div className="text-sm text-gray-600 space-y-1">
             <p>💵 Valor sem VAT: R$ {(amount / 1.21).toFixed(2)}</p>
@@ -191,7 +192,11 @@ export default function Contas() {
         ) : (
           <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} className="w-full border p-2 rounded" required />
         )}
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">{isRecurring ? 'Criar recorrência' : 'Adicionar'}</button>
+
+        {amount > 0 && (<button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">{editingId != null ? "Salvar Edicao" : isRecurring ? 'Criar recorrência' : 'Adicionar'}</button>)}
+
+        {editingId ? <button type="button" onClick={clearForm} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-blue-600">Cancelar</button> : null}
+
       </form>
 
       {/* Filtros */}
