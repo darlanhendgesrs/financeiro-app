@@ -26,7 +26,7 @@ export default function Contas() {
   const [description, setDescription] = useState('')
   const [amount, setAmount] = useState(0)
   const [type, setType] = useState<'entrada' | 'saida'>('saida')
-  const [dueDate, setDueDate] = useState('')
+  const [due_date, setDueDate] = useState('')
   const [noVat, setNoVat] = useState(false)
 
   const [isRecurring, setIsRecurring] = useState(false)
@@ -190,7 +190,7 @@ export default function Contas() {
             <input type="month" value={recurringEnd} onChange={(e) => setRecurringEnd(e.target.value)} className="w-full border p-2 rounded" required />
           </div>
         ) : (
-          <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} className="w-full border p-2 rounded" required />
+          <input type="date" value={due_date} onChange={(e) => setDueDate(e.target.value)} className="w-full border p-2 rounded" required />
         )}
 
         {amount > 0 && (<button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">{editingId != null ? "Salvar Edicao" : isRecurring ? 'Criar recorrência' : 'Adicionar'}</button>)}
