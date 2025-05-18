@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../supabaseClient'
+import { NumericFormat } from 'react-number-format'
 import dayjs from 'dayjs'
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 
@@ -161,7 +162,20 @@ export default function Contas() {
       {/* Formulário */}
       <form onSubmit={handleSubmit} className="space-y-2 mb-6">
         <input type="text" placeholder="Descrição" value={description} onChange={(e) => setDescription(e.target.value)} className="w-full border p-2 rounded" required />
-        <input type="number" value={amount} onChange={(e) => setAmount(Number(e.target.value))} className="w-full border p-2 rounded" required />
+        <NumericFormat
+          value={amount}
+          thousandSeparator="."
+          decimalSeparator=","
+          decimalScale={2}
+          fixedDecimalScale
+          suffix=" €"
+          allowNegative={false}
+          className="w-full border p-2 rounded text-left"
+          onValueChange={(values) => {
+            setAmount(values.floatValue || 0)
+          }}
+        />
+
 
         {amount > 0 && !noVat && (
           <div className="text-sm text-gray-600 space-y-1">
@@ -229,11 +243,11 @@ export default function Contas() {
           <li key={bill.id} className="border p-3 rounded bg-white flex flex-col">
             <div className="flex justify-between items-center">
               <span className={`font-semibold ${getStatusColor(bill)}`}>{bill.description} ({bill.type})</span>
-              <span className={`font-semibold ${getStatusColor(bill)}`}>R$ {bill.amount.toFixed(2)}</span>
+              <span className={`font-semibold ${getStatusColor(bill)}`}>€ {bill.amount.toFixed(2)}</span>
             </div>
             <div className="text-sm text-gray-500 flex justify-between">
               <span>Vencimento: {dayjs(bill.due_date).format('DD/MM/YYYY')}</span>
-              <span>{bill.vat > 0 ? `Base: R$ ${bill.net_amount.toFixed(2)} | VAT: R$ ${bill.vat.toFixed(2)}` : 'Sem VAT'}</span>
+              <span>{bill.vat > 0 ? `Base: R$ ${bill.net_amount.toFixed(2)} | VAT: € ${bill.vat.toFixed(2)}` : 'Sem VAT'}</span>
             </div>
             {bill.status === 'pendente' && (
               <div className="flex justify-end gap-2 mt-2">
